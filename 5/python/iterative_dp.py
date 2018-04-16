@@ -8,18 +8,12 @@ class Solution:
         for i in range(len(s)):
             dp[i][i] = 1
             if i < len(s) - 1 and s[i] == s[i + 1]: dp[i][i + 1] = 1
-
-        def recursive(s, start, end):
-            if dp[start][end] != 0: return dp[start][end]
-            if s[start] == s[end]:
-                dp[start][end] = recursive(s, start + 1, end - 1)
-                return dp[start][end]
-            dp[start][end] = -1
-            return -1
-
-        for i in range(len(s)):
-            for j in range(i, len(s)):
-                recursive(s, i, j)
+        for step_size in range(2, len(s)):
+            for start in range(len(s) - step_size):
+                if s[start] == s[start + step_size]:
+                    dp[start][start + step_size] = dp[start + 1][start + step_size - 1]
+                else:
+                    dp[start][start + step_size] = 0
         start = end = maxLen = 0
         for i in range(len(s)):
             for j in range(i, len(s)):
@@ -28,7 +22,10 @@ class Solution:
                     start, end = i, j
         return s[start:end + 1]
 
+    def exec(self):
+        print(s.longestPalindrome("ccc"))
+
 
 if __name__ == '__main__':
     s = Solution()
-    print(s.longestPalindrome('babad'))
+    s.exec()
