@@ -5,8 +5,25 @@ class Solution:
         :rtype: List[List[int]]
         """
         res = []
-        dict_buffer = {}
-        for i, n in enumerate(nums):
-            dict_buffer[n] = i
-        for i, n in enumerate(nums):
-            target = -n
+        nums.sort()
+        for i, p in enumerate(nums[:-2]):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            low, high, target = i + 1, len(nums) - 1, -p
+            while low < high:
+                if nums[low] + nums[high] == target:
+                    res.append([p, nums[low], nums[high]])
+                    while low < high and nums[low] == nums[low + 1]: low += 1
+                    while low < high and nums[high] == nums[high - 1]: high -= 1
+                    low += 1
+                    high -= 1
+                elif nums[low] + nums[high] < target:
+                    low += 1
+                elif nums[low] + nums[high] > target:
+                    high -= 1
+        return res
+
+
+if __name__ == '__main__':
+        s = Solution()
+        print(s.threeSum([-1, 0, 1, 2, -1, -4]))
