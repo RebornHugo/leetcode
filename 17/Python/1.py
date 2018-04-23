@@ -1,14 +1,14 @@
 from collections import deque
 
 map_dict = {
-    2: 'abc',
-    3: 'def',
-    4: 'ghi',
-    5: 'jkl',
-    6: 'mno',
-    7: 'pqrs',
-    8: 'tuv',
-    9: 'wxyz'
+    '2': 'abc',
+    '3': 'def',
+    '4': 'ghi',
+    '5': 'jkl',
+    '6': 'mno',
+    '7': 'pqrs',
+    '8': 'tuv',
+    '9': 'wxyz'
 }
 
 
@@ -18,7 +18,7 @@ class Solution:
         :type digits: str
         :rtype: List[str]
         """
-        if digits is None: return []
+        if digits == "": return []
         cur = deque()
         res = []
         self.dfs(digits, cur, 0, res)
@@ -26,11 +26,11 @@ class Solution:
 
     def dfs(self, digits, cur, l, res):
         if l == len(digits):
-            res.append(cur)
+            res.append(''.join(cur))
             return
-        for i in digits[l]:
-            cur.append(map(map_dict[i]))
-            self.dfs(digits, ''.join(cur), l + 1, res)
+        for i in map_dict[digits[l]]:
+            cur.append(i)
+            self.dfs(digits, cur, l + 1, res)
             cur.pop()
 
 
