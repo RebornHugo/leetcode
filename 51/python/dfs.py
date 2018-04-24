@@ -30,10 +30,8 @@ class Solution:
 
         def n_queens(y):
             if y == n:
-                board_copy = board.copy()
-                for i, l in enumerate(board_copy):
-                    board_copy[i] = ''.join(l)
-                res.append(board_copy.copy())
+                board_copy = [''.join(_) for _ in board]
+                res.append(board_copy)
                 return
             for x in range(n):
                 if not available(x, y): continue
