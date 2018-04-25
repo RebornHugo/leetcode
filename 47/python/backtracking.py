@@ -31,4 +31,4 @@ class Solution:
 
 if __name__ == '__main__':
     s = Solution()
-    print(s.permuteUnique([3, 3, 0, 3]))
+    print(s.permuteUnique([1, 1, 2]))

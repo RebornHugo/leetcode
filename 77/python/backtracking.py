@@ -1,4 +1,6 @@
-import itertools
+# import itertools
+# one line solution : return list(itertools.combinations(range(1, n + 1), k))
+
 from collections import deque
 
 
@@ -16,9 +18,13 @@ class Solution:
             if depth == k:
                 res.append(list(cur))
                 return
-            for i in l[depth:]:
-                if i in cur:
-                    continue
+            try:
+                start = cur[-1]
+            except IndexError:
+                start = 0
+            for i in l[start:]:
+                # if cur and i <= cur[-1]:
+                #     continue
                 cur.append(i)
                 dfs(cur, depth + 1)
                 cur.pop()
