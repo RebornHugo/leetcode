@@ -18,6 +18,22 @@ class Solution:
 
         return list(map(func_product, nums))
 
+class Solution3:
+    # @param {integer[]} nums
+    # @return {integer[]}
+    def productExceptSelf(self, nums):
+        p = 1
+        length = len(nums)
+        output = []
+        for i in range(0, length):
+            output.append(p)
+            p = p * nums[i]
+        p = 1
+        for i in range(length - 1, -1, -1):
+            output[i] = output[i] * p
+            p = p * nums[i]
+        return output
+
 
 s = Solution()
 print(s.productExceptSelf([1, 2, 3, 4, 0]))
