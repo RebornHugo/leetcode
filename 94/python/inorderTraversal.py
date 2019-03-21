@@ -18,6 +18,7 @@ class Solution:
         cur = root
         while cur or stack:
             while cur:
+                # res.append(cur.val) is for pre-order Traversal
                 stack.append(cur)
                 cur = cur.left
             cur = stack.pop()

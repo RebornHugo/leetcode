@@ -1,29 +1,26 @@
-def heap_sort(lst):
+def heap_sort(nums):
     def sift_down(start, end):
-        """最大堆调整"""
         root = start
         while True:
             child = 2 * root + 1
             if child > end:
                 break
-            if child + 1 <= end and lst[child] < lst[child + 1]:
+            if child + 1 <= end and nums[child] < nums[child + 1]:
                 child += 1
-            if lst[root] < lst[child]:
-                lst[root], lst[child] = lst[child], lst[root]
+            if nums[child] > nums[root]:
+                nums[root], nums[child] = nums[child], nums[root]
                 root = child
             else:
                 break
 
-    # 创建最大堆
+    # create maximum heap
+    for start in range((len(nums) - 2) // 2, -1, -1):
+        sift_down(start, len(nums) - 1)
 
-    for start in range((len(lst) - 2) // 2, -1, -1):
-        sift_down(start, len(lst) - 1)
-
-    # 堆排序
-    for end in range(len(lst) - 1, 0, -1):
-        lst[0], lst[end] = lst[end], lst[0]
+    # heap sort
+    for end in range(len(nums) - 1, 0, -1):
+        nums[0], nums[end] = nums[end], nums[0]
         sift_down(0, end - 1)
-    return lst
 
 
 def main():

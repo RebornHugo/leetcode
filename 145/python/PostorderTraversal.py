@@ -13,20 +13,27 @@ class Solution:
     def postorderTraversal_recursive(self, root: TreeNode) -> List[int]:
         res = []
 
-        def f(cur):
+        def postorder(cur):
             if cur:
-                f(cur.left)
-                f(cur.right)
+                postorder(cur.left)
+                postorder(cur.right)
                 res.append(cur.val)
 
-        f(root)
+        postorder(root)
         return res
 
     def postorderTraversal(self, root: TreeNode) -> List[int]:
-        nodes, stack = [], [root]
+        if not root:
+            return []
+        res, stack = [], [(root, False)]
         while stack:
-            node = stack.pop()
-            if node:
-                nodes.insert(0, node.val)
-                stack += [node.left, node.right]
-        return nodes
+            cur, visited = stack.pop()
+            if cur:
+                if visited:
+                    res.append(cur.val)
+                else:
+                    stack.append((cur, True))
+                    stack.append((cur.right, False))  # 这里注意先右边进栈再左边进栈
+                    stack.append((cur.left, False))
+
+        return res

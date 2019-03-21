@@ -1,41 +1,42 @@
-def quick_sort_in_place(lst):
-    lst = lst[:]
-    n = len(lst)
+def quick_sort_in_place(nums):
+    nums = nums[:]
+    n = len(nums)
 
-    def partition(lst, start, end):
+    def partition(nums, start, end):
         i = start - 1
         pivotIndex = end
-        pivot = lst[end]
+        pivot = nums[end]
         for j in range(start, end):
-            if lst[j] < pivot:
+            if nums[j] < pivot:
                 i = i + 1
-                lst[i], lst[j] = lst[j], lst[i]
-        lst[i + 1], lst[pivotIndex] = lst[pivotIndex], lst[i + 1]
+                nums[i], nums[j] = nums[j], nums[i]
+        nums[i + 1], nums[pivotIndex] = \
+            nums[pivotIndex], nums[i + 1]
         return i + 1
 
-    def sort(lst, start, end):
+    def sort(nums, start, end):
         if start >= end:
             return
-        p = partition(lst, start, end)
-        sort(lst, start, p - 1)
-        sort(lst, p + 1, end)
+        p = partition(nums, start, end)
+        sort(nums, start, p - 1)
+        sort(nums, p + 1, end)
 
-    sort(lst, 0, n - 1)
-    return lst
+    sort(nums, 0, n - 1)
+    return nums
 
 
-def quick_sort(lst):
-    if len(lst) <= 1:
-        return lst
+def quick_sort(nums):
+    if len(nums) <= 1:
+        return nums
     less = []
     greater = []
-    pivot = lst.pop()
-    for item in lst:
+    pivot = nums.pop()
+    for item in nums:
         if item < pivot:
             less.append(item)
         else:
             greater.append(item)
-    lst.append(pivot)
+    nums.append(pivot)
     return quick_sort(less) + [pivot] + quick_sort(greater)
 
 

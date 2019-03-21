@@ -13,13 +13,13 @@ class Solution:
     def preorderTraversal_recursive(self, root: TreeNode) -> List[int]:
         res = []
 
-        def f(cur):
+        def preorder(cur):
             if cur:
                 res.append(cur.val)
-                f(cur.left)
-                f(cur.right)
+                preorder(cur.left)
+                preorder(cur.right)
 
-        f(root)
+        preorder(root)
         return res
 
     def preorderTraversal(self, root: TreeNode) -> List[int]:
